@@ -1,0 +1,19 @@
+/* наша HTML таблица */
+
+
+/* заголовки таблицы */
+table#sort thead td {
+    cursor:pointer;
+   cursor:hand;
+    font-weight:bold;
+    
+}
+table thead td.nosort{
+    cursor:default !important;
+  
+}
+/* заголовок отсортированного столбца */
+table thead td.curcol{
+    background-color:#999999;
+    color:#FFFFFF
+}

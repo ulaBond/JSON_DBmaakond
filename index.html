@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html ng-app = "maakondApp">
+<head>
+
+	<meta charset="UTF-8">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+
+	<!-- CSS Bootstrap & Custom -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/templatemo_misc.css">	<!-- Main CSS -->
+	<link rel="stylesheet" href="css/templatemo_style.css">
+	<link href="js/lightbox/css/lightbox.css" rel="stylesheet" type="text/css"/><!--for lightbox -->
+ 
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	
+	
+  	<script src="js/main.js"></script>  
+  
+</head>
+
+<body ng-controller="manageBlock">
+	<div class="site-header">
+		<div class="main-navigation">				
+			<div class="container">			
+			<nav class="navbar">
+				<div class="container-fluid"  >
+					<p class="mynavbar-brand" >Estonia Site</p>
+					<div class="" id="myNavbar">	
+						<ul class="nav navbar-nav">
+							<li><a href="" ng-click='toggleDisplayAbout()'>Главная</a></li>
+							<li><a href="" ng-click='toggleDisplayMaakond()'>Уезды</a></li>
+							<li><a href="" ng-click='toggleDisplayCity()'>Города Эстонии</a></li>
+							<li><a  href="" ng-click='toggleDisplayGallery()'>Галерея</a></li>						 
+						</ul>	
+					</div>	
+				</div>	
+			</nav>
+			</div> 
+	  </div> <!-- /.main-navigation -->	  	
+	</div> <!-- /.site-header -->	
+	
+<div id="menu-container">  
+    <div class="content homepage animated fadeInDown">
+		<div class="container" >
+			<div class="row" style="display: flex;">		
+		<!--    CONTENT     style="display: flex;" добавить после создания управления в тег <div class="row" >	-->		
+				<div class="about-us-content"  style="width:1170px; " ng-show='displayAbout'>
+					<h2 class="page-title">Административное деление Эстонии</h2>
+					<p>Эстония делится на 15 уездов (эст. maakond, мааконд), которые возглавляются назначаемыми правительством уездными старейшинами (эст. maavanem). 
+					Волость (эст. vald) и город (эст. linn) как административная единица делятся на поселения, в качестве которых могут выступать города, деревни, поселки городского и сельского типа. Помимо городов со статусом местного самоуправления, в Эстонии имеется еще 37 городов, которые в отдельности не образуют административных единиц. Всего в Эстонии 47 городов в качестве единиц поселения.
+					</p><p>
+					В Эстонии 79 самоуправлений - 15 городов и 64 волости - которые самостоятельно решают и организуют вопросы местной жизни. Независимо от своего размера, самоуправления должны выполнять одни и те же задачи по всей Эстонии и предлагать населению одни и те же услуги. Территория местных самоуправлений, или административных единиц, в свою очередь, делится на поселения: города, поселки городского типа, поселки сельского типа и деревни,
+					Деятельность волости или города организует и управляет ей избранный жителями представительный орган - волостное (эст. vallavolikogu) или городское собрание(эст. linnavolikogu), которое утверждает исполнительный орган, то есть управу. Таллин делится на внутригородские административно-территориальные единицы — части города (эст. linnaosa).</p>
+					<p>Расселение - это подразделение территории волости или города на единицы расселения. Единицы расселения делятся следующим образом: 
+					<p>Деревня представляет собой малонаселенное поселение или, как правило, густонаселенное поселение с численностью постоянного населения менее 300.</p><p>Поселок сельского типа - это, как правило, густонаселенное поселение с численностью постоянного населения не менее 300.</p><p><b>Поселок городского типа и город</b> как единица расселения, как правило, представляют собой густонаселенные поселения с численностью постоянного населения не менее 1000.</p><p>В Эстонии насчитывается 47 городов; 12 поселков городского типа; 188 поселков сельского типа и 4455 деревень.</p>
+					<p><a href="https://www.fin.ee/ru/gosudarstvo-municipalitety-planirovanie/mestnoe-municipalitety#gosudarstvennyy-nadz">Источник</a></p>
+				</div>  		 
+	<!--    maakonnad          -->			
+				<div class="about-us-content"  ng-controller="maakonnadCtrl" ng-show='displayMaakond'>				
+				<h2 class="page-title">Уезды</h2>				
+					<table class="table table-hover">
+						<thead>
+						<tr>
+						   <th>NN</th>
+							<th>Название</th>
+							<th>Столица</th>
+							<th>Описание</th>
+						</tr>
+						</thead>
+						<tbody ng-repeat="maakond in maakonnadList | orderBy: 'id'">
+							<tr >    
+								<td>{{maakond.id}}</td>
+								<td>{{maakond.name}}</td>
+								<td>{{maakond.capital}}</td>
+								<td>{{maakond.description}}</td>
+							</tr>						
+							
+						</tbody>
+					</table>
+					<p style="text-align:left;">Всего представлено уездов:<span ng-bind="maakonnadList.length"></span></p>		
+				</div>  
+<!--    cities          -->
+				<div class="about-us-content" ng-show='displayCity'>
+					<h2 class="page-title" >Города Эстонии</h2>
+				  	
+					<div class="about-us-content" style="display: flex; flex-wrap: wrap;" ng-controller="cityCtrl">
+						<div class="col-md-4" ng-repeat="city in cityList | orderBy: 'id'" >
+							<div class="product-item" style="height:620px" >
+								<h3 class="product-title">Linn:{{city.name}} </h3>
+								<img ng-src="images/{{city.photo}}" width=330 height=180/>
+								<p>{{city.text}}</p>
+								<br><strong>Количество жителей: {{city.people}}</strong>
+							
+							</div> 
+						</div>
+						<p style="text-align:right;">Всего представлено городов: 
+						<span ng-bind="cityList.length"></span></p> 				
+					</div> 
+				</div> 	
+<!--    gallery          -->				
+		<div class="about-us-content" ng-show='displayGallery'>	
+				<h2 class="page-title">Галерея</h2>
+		 
+			<div class="about-us-content" style="display: flex; flex-wrap: wrap;" ng-controller="galleryCtrl">	
+				<div class="col-md-2 col-sm-6"  ng-repeat="gallery in galleryList">
+					<div class="gallery-item" >
+						<div class="image" ng-controller="cityCtrl">
+							<a ng-repeat="city in cityList" ng-if="gallery.idCity == city.id" class="example-image" data-title="{{city.name}}" data-lightbox="imageLightBox" href="images/{{gallery.picture}}"><img ng-src="images/{{gallery.picture}}" class="example-image"  alt="" width=140 height=90/></a>			
+						</div> 
+					</div> 
+				</div>				
+			</div>  
+		</div>		
+			</div> <!-- /.row -->
+		</div> <!-- /.slide-item -->
+	</div> <!-- /.homepage -->
+</div>	 
+	
+<div id="templatemo_footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<p>Copyright &copy; 2022 IVKHK | Design: JKTV21 Bond</p>
+				</div> <!-- /.col-md-12 -->
+			</div> <!-- /.row -->
+		</div> <!-- /.container -->
+</div> <!-- /.templatemo_footer -->
+<script src="js/lightbox/lightbox-plus-jquery.min.js"></script>
+</body>
+</html>
